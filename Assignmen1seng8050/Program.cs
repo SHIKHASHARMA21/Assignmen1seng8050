@@ -1,24 +1,14 @@
 ﻿using System;
 
-class Program
+class Virtualpet
 {
-    static void Main()
-    {
-        Console.WriteLine("Welcome to the Virtual Pet Simulator!");
-
-        Console.Write("Choose a pet type (Cat, Dog, Horse): ");
-        string petType;
-    }
-    class virtualpet
-{
-    // Pet attributes
     private string petType;
     private string petName;
     private int hunger;
     private int happiness;
     private int health;
 
-    public virtualpet(string type, string name)
+    public Virtualpet(string type, string name)
     {
         petType = type;
         petName = name;
@@ -27,42 +17,38 @@ class Program
         health = 10;
     }
 
-    // Method to display pet's status
     public void DisplayStatus()
     {
-        Console.WriteLine($"Pet Type: {petType}, Name: {petName}");
+        Console.WriteLine($"Name: {petName}");
         Console.WriteLine($"Hunger: {hunger}/10, Happiness: {happiness}/10, Health: {health}/10");
         Console.WriteLine();
     }
 
-    // Method to feed the pet
+
     public void Feed()
     {
-        Console.WriteLine($"{petName} is being fed...");
-        hunger = Math.Max(0, hunger - 2);
+        Console.WriteLine($""""{petName} is eating their meal""");
+        hunger = Math.Max(0, hunger - 1);
         health = Math.Min(10, health + 1);
         DisplayStatus();
     }
 
-    // Method to play with the pet
     public void Play()
     {
         Console.WriteLine($"{petName} is playing...");
-        happiness = Math.Min(10, happiness + 2);
+        happiness = Math.Min(10, happiness + 1);
         hunger = Math.Min(10, hunger + 1);
         DisplayStatus();
     }
 
-    // Method to let the pet rest
     public void Rest()
     {
-        Console.WriteLine($"{petName} is resting...");
-        health = Math.Min(10, health + 2);
+        Console.WriteLine($"{petName} is taking rest...");
+        health = Math.Min(10, health + 1);
         happiness = Math.Max(0, happiness - 1);
         DisplayStatus();
     }
 
-    // Method to simulate the passage of time
     public void PassTime()
     {
         Console.WriteLine($"Time is passing for {petName}...");
@@ -72,13 +58,11 @@ class Program
         DisplayStatus();
     }
 
-    // Method to check if the pet is in a critical state
-    public bool IsCritical()
+    public bool IsCritical()  //critical state
     {
-        return hunger <= 2 || happiness <= 2 || health <= 2;
+        return hunger <= 0 || happiness <= 0 || health <= 0;
     }
 }
-
 class Program
 {
     static void Main()
@@ -134,7 +118,3 @@ class Program
             if (pet.IsCritical())
             {
                 Console.WriteLine("Warning: Your pet is in a critical state. Take action!");
-            }
-        }
-    }
-}
